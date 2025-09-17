@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini App Front</title>
+</head>
+<body>
+  <h1>Простой Telegram Mini App</h1>
+  <p id="user">Загрузка...</p>
+  <button id="btn">Закрыть Mini App</button>
+
+  <script>
+    const tg = window.Telegram?.WebApp;
+
+    if (tg) {
+      tg.expand(); // расширяем окно
+
+      const user = tg.initDataUnsafe?.user;
+      document.getElementById("user").textContent =
+        user ? `Привет, ${user.first_name}!` : "Нет данных пользователя";
+
+      document.getElementById("btn").onclick = () => tg.close();
+    } else {
+      document.getElementById("user").textContent =
+        "Запустите приложение внутри Telegram.";
+    }
+  </script>
+</body>
+</html>
